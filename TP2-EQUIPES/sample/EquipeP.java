@@ -21,6 +21,7 @@ public class EquipeP {
     private static int r;
     private static int[] distanceALarbitre;
     private static int[] distanceDepuisArbitre;
+    public static int[][] equipes;
 
     public static void main(String[] args) {
 
@@ -143,6 +144,13 @@ public class EquipeP {
         distanceDepuisArbitre=Dijkstra(m+1, tabInt);
         distanceALarbitre=DijkstraInv(m+1, tabInt);
         
+    }
+    public static int cout(){
+        for(int i=0;i<equipes.length;i++){
+            for(int j=0;j<equipes.length;j++){
+                
+            }
+        }
     }
 
     
