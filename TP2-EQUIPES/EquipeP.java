@@ -22,7 +22,12 @@ public class EquipeP {
     private static int[] distanceALarbitre;
     private static int[] distanceDepuisArbitre;
     public static int[][] equipes;
+    private static int coutMinimal;
+    
 
+    //*************Le main récupère le fichier.in indiqué en arg[0], le converti en tableau de tableau de int**********************
+    //*************puis appelle  coutMinimal=solution(int[][] tab) qui va renvoyer le cout minimal (donc la réponse finale)********
+    //*************Un fichier.out est créé contenant la phrase "le cout minimale est: "+coutMinimal  ******************************
     public static void main(String[] args) {
 
         try {
@@ -34,7 +39,8 @@ public class EquipeP {
 
             //*************On lit ligne par ligne et les stocke dans un tableau de String**********************
             String [] tab;
-            tab=new String[Integer.parseInt(strCurrentLine)];
+
+            tab=new String[Integer.parseInt(lastWord(strCurrentLine))];
             int z=0;
             while ((strCurrentLine = bufferedreader.readLine()) != null) {
                 tab[z]=strCurrentLine;
@@ -46,19 +52,19 @@ public class EquipeP {
             tabString=parse(tab);
             
             //******On converti le tableau de tableau de String en Tableau de Tableau de Int ***************/
+            
             tabInt=convert(tabString);
-            //afficheTab(tabInt);
 
             //*********On trouve la solution au problème et la renvoie dans un fichier de sortie *******************/
 
-            //int nombreRecettes=solution();
+            coutMinimal=solution();
 
-            String nomFichier = "sortieGateau"+ FILENAME+".txt"; // Nom du fichier de sortie
+            String nomFichier =  FILENAME+".out.txt"; // Nom du fichier de sortie
             //System.out.println("\n Nombre de recettes possibles "+nombreRecettes);
             FileWriter fileWriter = new FileWriter(nomFichier, true);
             PrintWriter printWriter = new PrintWriter(fileWriter);
 
-            //printWriter.println("Nombre de recettes possibles : " + nombreRecettes); // Écrit le paramètre dans le fichier
+            printWriter.println("Cout minimal : " + coutMinimal); // Écrit le paramètre dans le fichier
             printWriter.close(); // Ferme le PrintWriter pour libérer les ressources
         
             
@@ -67,6 +73,8 @@ public class EquipeP {
         }
         
     }
+
+    //*************La fonction parse() sépare les mots et converti donc un String[] en Strin[][]**********************
 
     public static String [][] parse(String [] tab){
         String [][] res=new String [tab.length][];
@@ -87,19 +95,41 @@ public class EquipeP {
             res [h]= new String [nombreDeMots+1];
             //On parse
             for(int i=0;i<ligneCourante.length();i++){
-                if (ligneCourante.charAt(i)==' '){
-                    res[h][motCourant]=ligneCourante.substring(dernierePosition,i);
+                if (ligneCourante.charAt(i)==' '|| i == ligneCourante.length() - 1){
+                    res[h][motCourant]=ligneCourante.substring(dernierePosition, i == ligneCourante.length() - 1 ? i + 1 : i).trim();
                     while(i+1<ligneCourante.length() && ligneCourante.charAt(i+1)==' '){ i++;}
-                    dernierePosition=i;
+                    dernierePosition=i+1;
                     motCourant++;
                 }
             }
-            res[h][motCourant] = ligneCourante.substring(dernierePosition).trim();
+            if (dernierePosition < ligneCourante.length()) {
+                res[h][motCourant] = ligneCourante.substring(dernierePosition).trim();
+            }
+            
             
         }
         return res;
     }
 
+    //*************La fonction LastWord sélectionne le dernier mot d'une ligne (utili pour connaitre la taille du tableau indiquée ligne 0)**********************
+    public static String lastWord(String s){
+        String res="";
+        
+        int premierePos=0;
+        int dernierePos=s.length();
+        for(int i=0;i<s.length();i++){
+            if (s.charAt(i)==' '){
+                while(s.charAt(i+1)==' ' && i+1<s.length()){
+                    i++;
+                }
+                premierePos=i+1;
+            }
+        }
+        res=s.substring(premierePos,dernierePos);
+        return res;
+    }
+
+    //*************la fonction convert converti un String[][] en int[][]**********************
     public static int[][] convert(String [][] tableau){
         int [][] tab=new int[tableau.length][];
         for(int i=0;i<tableau.length;i++){
@@ -151,6 +181,10 @@ public class EquipeP {
                 
             }
         }
+        return 0;
+    }
+
+    public static int solution(){
         return 0;
     }
 
