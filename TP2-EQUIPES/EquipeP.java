@@ -34,6 +34,11 @@ public class EquipeP {
         try {
             //**********************On lit l'adresse l'adresse du fichier passé en argument*********************************
             FILENAME=args[0];
+            tabDistances=initTabDistances(FILENAME);
+            afficheTab(tabDistances);
+
+
+
             FileReader filereader = new FileReader(FILENAME);
             BufferedReader bufferedreader = new BufferedReader(filereader);
             String strCurrentLine = bufferedreader.readLine();
@@ -43,6 +48,8 @@ public class EquipeP {
             m=Integer.parseInt(selectWord(strCurrentLine,1));
             p=Integer.parseInt(selectWord(strCurrentLine,2));
             r=Integer.parseInt(selectWord(strCurrentLine,3));
+
+            
 
             //*************On lit ligne par ligne et les stocke dans un tableau de String**********************
             String [] tab;
@@ -168,8 +175,56 @@ public class EquipeP {
 
 
     //************nouvTableau() doit convertir tabInt en un tableau sous forme de matrice d'adjacence    **********************
-    public void initTabDistances(){
-        tabDistances=new int[3][];
+    public static int[][] initTabDistances(String file){
+        int n;
+        int m;
+        int p;
+        int r;
+
+        int x;
+        int y;
+        int l;
+
+        int[][] tab;
+
+        try {
+            FileReader fileReader = new FileReader(file);
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+            String line = bufferedReader.readLine();
+            String[] result = line.split(" ");
+            n = Integer.parseInt(result[0]);
+            m = Integer.parseInt(result[1]);
+            p = Integer.parseInt(result[2]);
+            r = Integer.parseInt(result[3]);
+
+            tab = new int[m+1][m+1];
+
+            for (int i = 0; i < m+1 ; i ++ ) {
+                for ( int j = 0; j < m+1 ; j ++ ){
+                    tab[i][j] = -1;
+                }
+            }
+
+            line = bufferedReader.readLine();
+            while ( line != null ){
+                result = line.split(" ");
+                x = Integer.parseInt(result[0]);
+                y = Integer.parseInt(result[1]);
+                l = Integer.parseInt(result[2]);
+
+                tab[x-1][y-1] = l;
+
+                line = bufferedReader.readLine();
+            }
+
+        } catch (IOException e) {
+            tab = new int[1][1];
+            e.printStackTrace();
+        }
+
+        return tab;
+    
     }
 
     //*************DIJKSTRA doit renvoyer un tableau de int comprenant toutes les distances du sommet numéro a au sommet d'indice i  **********************
