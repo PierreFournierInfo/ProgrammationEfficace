@@ -14,6 +14,7 @@ public class EquipeP {
     private static String [][] tabString;
 
     private static int [][] tabInt;
+    private static int [][] tabDistances;
     private static int Arbitre;
     private static int m;
     private static int n;
@@ -160,6 +161,16 @@ public class EquipeP {
         }
     }
 
+
+
+    
+
+    //************nouvTableau() doit convertir tabInt en un tableau sous forme de matrice d'adjacence    **********************
+    public void initTabDistances(){
+        tabDistances=new int[3][];
+    }
+
+    //*************DIJKSTRA doit renvoyer un tableau de int comprenant toutes les distances du sommet numéro a au sommet d'indice i  **********************
     public static int[] Dijkstra(int a,int[][]tab){
         int[]tabFin=new int[3];
         return tabFin;
@@ -168,6 +179,11 @@ public class EquipeP {
         int[]tabFin=new int[3];
         return tabFin;
     }
+
+
+
+
+
 
     public static void chemins(int [][] tabInt){
         int[][] couts= new int[m][];
