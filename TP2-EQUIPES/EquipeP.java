@@ -38,10 +38,16 @@ public class EquipeP {
             BufferedReader bufferedreader = new BufferedReader(filereader);
             String strCurrentLine = bufferedreader.readLine();
 
+            //****************Apreès avoir lu la premiere ligne, on initialise les valeurs de n,p,l et m ***************************
+            n=Integer.parseInt(selectWord(strCurrentLine,0));
+            m=Integer.parseInt(selectWord(strCurrentLine,1));
+            p=Integer.parseInt(selectWord(strCurrentLine,2));
+            r=Integer.parseInt(selectWord(strCurrentLine,3));
+
             //*************On lit ligne par ligne et les stocke dans un tableau de String**********************
             String [] tab;
 
-            tab=new String[Integer.parseInt(lastWord(strCurrentLine))];
+            tab=new String[r];
             int z=0;
             while ((strCurrentLine = bufferedreader.readLine()) != null) {
                 tab[z]=strCurrentLine;
@@ -112,22 +118,18 @@ public class EquipeP {
         return res;
     }
 
-    //*************La fonction LastWord sélectionne le dernier mot d'une ligne (utili pour connaitre la taille du tableau indiquée ligne 0)**********************
-    public static String lastWord(String s){
-        String res="";
-        
-        int premierePos=0;
-        int dernierePos=s.length();
-        for(int i=0;i<s.length();i++){
-            if (s.charAt(i)==' '){
-                while(s.charAt(i+1)==' ' && i+1<s.length()){
-                    i++;
-                }
-                premierePos=i+1;
-            }
+
+    //*************La fonction selectWord sélectionne le ie mot d'une chaine de caractere (utili pour connaitre la taille du tableau indiquée ligne 0)**********************
+    public static String selectWord(String s, int x) {
+        // Divise la chaîne de caractères en mots, en utilisant l'espace comme séparateur.
+        String[] words = s.split("\\s+"); // "\\s+" est une expression régulière qui correspond à un ou plusieurs espaces.
+    
+        // Vérifie si l'index x est dans la plage du tableau de mots.
+        if (x >= 0 && x < words.length) {
+            return words[x]; // Retourne le mot à l'index spécifié.
+        } else {
+            return ""; // Retourne une chaîne vide si l'index est hors de la plage.
         }
-        res=s.substring(premierePos,dernierePos);
-        return res;
     }
 
     //*************la fonction convert converti un String[][] en int[][]**********************
@@ -163,7 +165,7 @@ public class EquipeP {
 
 
 
-    
+
 
     //************nouvTableau() doit convertir tabInt en un tableau sous forme de matrice d'adjacence    **********************
     public void initTabDistances(){
