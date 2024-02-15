@@ -2,11 +2,13 @@
 public class TasBin{
     protected int taille;
     protected int [] tas;
+    protected int [] dist;
     protected int pointeur;
 
-    public TasBin(int taille){
+    public TasBin(int taille, int[] dist){
         this.taille=taille;
         this.pointeur=0;
+        this.dist = dist;
         this.tas=new int[taille];
     }
 
@@ -25,6 +27,10 @@ public class TasBin{
         return 2*i+2;
     }
 
+    public boolean empty(){
+        return pointeur < 1;
+    }
+
     //insérer une valeur
     public void insert(int value){
         if(pointeur>=taille){
@@ -34,7 +40,7 @@ public class TasBin{
         tas[pointeur]=value;
         int c=pointeur;
 
-        while(tas[c]<tas[getP(c)]){
+        while(dist[c]<dist[getP(c)]){
             inverse(c,getP(c));
             c=getP(c);
         }
@@ -43,11 +49,33 @@ public class TasBin{
 
     //retire le minimum
     public int remove(){
+        //System.out.println("poniteur : " + pointeur);
         int p=tas[0];
+        
         tas[0]=tas[--pointeur];
         descend(0);
         return p;
     }
+
+    //modifie la distance du sommet s par rapport à l'arbitre
+    public void decreasekey(int s, int value){
+        dist[s] = value;
+        for(int i = 0; i < tas.length; i++){
+            if(tas[i] == s)remonte(i);
+        }
+    }
+
+    //fait remonte une valeur tant qu'elle est plus petite que sont parent 
+    private void remonte(int i){
+        if(i > 0){
+            int pere = (i%2 == 0) ? i-2 : i-1;
+            if(dist[tas[pere]] > dist[tas[i]]){
+                inverse(pere, i);
+                remonte(pere);
+            }
+        }
+    }
+
 
     //inverse 2 valeurs
     private void inverse(int x, int y) {
@@ -63,11 +91,11 @@ public class TasBin{
         int lChild = getL(index);
         int rChild =getR(index);
 
-        if (lChild < taille && tas[lChild] < tas[minIndex]) {
+        if (lChild < taille && dist[lChild] < dist[minIndex]) {
             minIndex = lChild;
         }
 
-        if (rChild < taille && tas[rChild] < tas[minIndex]) {
+        if (rChild < taille && dist[rChild] < dist[minIndex]) {
             minIndex = rChild;
         }
 

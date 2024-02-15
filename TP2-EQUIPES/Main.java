@@ -4,5 +4,11 @@ public class Main{
         Parser.printTab(tab);
         System.out.println(tab[1][0]);
         System.out.println(tab[1][3]);
+
+        //Dijkstra
+        System.out.println();
+        System.out.println("Dijkstra :");
+        int[] dij = EquipeP.Dijkstra(tab.length, tab);
+        EquipeP.afficheDijkstra(dij);
     }
 }
