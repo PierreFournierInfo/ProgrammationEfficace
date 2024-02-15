@@ -37,6 +37,7 @@ public class EquipeP {
             //**********************On lit l'adresse l'adresse du fichier passé en argument*********************************
             FILENAME=args[0];
             tabDistances=initTabDistances(FILENAME);
+            System.out.println("Le Graphe d'origine");
             afficheTab(tabDistances);
 
 
@@ -51,7 +52,7 @@ public class EquipeP {
             p=Integer.parseInt(selectWord(strCurrentLine,2));
             r=Integer.parseInt(selectWord(strCurrentLine,3));
 
-            Arbitre=m;
+            Arbitre=m+1;
 
             
 
@@ -88,6 +89,11 @@ public class EquipeP {
             //Initialisation des distance depuis l'arbitre et jusqu a l arbitre
 
             initDistancesArbitre();
+
+            System.out.println("\nDijkstra de distanceALarbitre :");
+            afficheDijkstra(distanceALarbitre);
+            System.out.println("\nDijkstra de distanceDepuisArbitre :");
+            afficheDijkstra(distanceDepuisArbitre);
         
             
         } catch (IOException e) {
@@ -234,6 +240,7 @@ public class EquipeP {
         return tab;
     
     }
+
     public static void initDistancesArbitre(){
         
        distanceDepuisArbitre=Dijkstra(Arbitre,tabDistances);
