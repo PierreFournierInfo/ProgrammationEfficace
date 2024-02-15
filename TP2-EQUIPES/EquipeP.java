@@ -1,4 +1,3 @@
-
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -290,7 +289,30 @@ public class EquipeP {
     }
 
     public static int[] DijkstraInv(int a,int[][]tab){
-        int[]tabFin=new int[3];
+        int l = tab.length;
+
+        //initialisation de tabFin
+        int[]tabFin=new int[l];
+        for(int i = 0; i < l; i++)tabFin[i] = 10001;
+        tabFin[a-1] = 0;
+
+        //initialisation du tas binaire
+        TasBin tas = new TasBin(l, tabFin);  
+        tas.insert(l-1);    
+        for(int i = 0; i < l-1; i++){
+            tas.insert(i);
+        }
+
+        while(!tas.empty()){
+            int u = tas.remove();
+            for(int i = 0; i < l; i++){
+                // Mise a jour des distances des voisins de u
+                if(tab[i][u] > -1 && tabFin[i] > tab[i][u] + tabFin[u]){
+                    tabFin[i] = tab[i][u] + tabFin[u];
+                    tas.decreasekey(i, tabFin[i]);
+                }
+            }
+        }
         return tabFin;
     }
 
