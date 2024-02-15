@@ -84,6 +84,10 @@ public class EquipeP {
 
             printWriter.println("Cout minimal : " + coutMinimal); // Écrit le paramètre dans le fichier
             printWriter.close(); // Ferme le PrintWriter pour libérer les ressources
+
+            //Initialisation des distance depuis l'arbitre et jusqu a l arbitre
+
+            initDistancesArbitre();
         
             
         } catch (IOException e) {
@@ -229,6 +233,11 @@ public class EquipeP {
 
         return tab;
     
+    }
+    public static void initDistancesArbitre(){
+        
+       distanceDepuisArbitre=Dijkstra(Arbitre,tabDistances);
+       distanceALarbitre=DijkstraInv(Arbitre,tabDistances);
     }
 
     //*************DIJKSTRA doit renvoyer un tableau de int comprenant toutes les distances du sommet numéro a au sommet d'indice i+1  **********************
