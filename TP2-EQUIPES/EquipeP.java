@@ -23,6 +23,7 @@ public class EquipeP {
     private static int r;
     private static int[] distanceALarbitre;
     private static int[] distanceDepuisArbitre;
+    private static int[][] tabDistAllerRetour;
     public static int[][] equipes;
     private static int coutMinimal;
     
@@ -94,6 +95,7 @@ public class EquipeP {
             System.out.println("\nDijkstra de distanceDepuisArbitre :");
             afficheDijkstra(distanceDepuisArbitre);
         
+            afficheTab(tabDistAllerRetour);
             
         } catch (IOException e) {
             e.printStackTrace();
@@ -244,6 +246,14 @@ public class EquipeP {
         
        distanceDepuisArbitre=Dijkstra(Arbitre,tabDistances);
        distanceALarbitre=DijkstraInv(Arbitre,tabDistances);
+
+       tabDistAllerRetour = new int[distanceALarbitre.length][distanceALarbitre.length];
+
+       for (int i = 0; i<tabDistAllerRetour.length; i++) {
+           for (int j = 0; j<tabDistAllerRetour.length; j++){
+                tabDistAllerRetour[i][j] = distanceALarbitre[i] + distanceDepuisArbitre[j];
+           }
+       }
     }
 
     //*************DIJKSTRA doit renvoyer un tableau de int comprenant toutes les distances du sommet numéro a au sommet d'indice i+1  **********************
