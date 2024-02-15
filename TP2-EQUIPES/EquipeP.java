@@ -13,6 +13,8 @@ public class EquipeP {
     private static String FILENAME ;
     private static String [][] tabString;
 
+    private static TasBin tasBin;
+
     private static int [][] tabInt;
     private static int [][] tabDistances;
     private static int Arbitre;
@@ -48,6 +50,8 @@ public class EquipeP {
             m=Integer.parseInt(selectWord(strCurrentLine,1));
             p=Integer.parseInt(selectWord(strCurrentLine,2));
             r=Integer.parseInt(selectWord(strCurrentLine,3));
+
+            Arbitre=m;
 
             
 
