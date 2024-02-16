@@ -23,7 +23,8 @@ public class EquipeP {
     private static int r;
     private static int[] distanceALarbitre;
     private static int[] distanceDepuisArbitre;
-    private static int[][] tabDistAllerRetour;
+    private static int[] tabDistAllerRetour;
+    private static int[] tabTri;
     public static int[][] equipes;
     private static int coutMinimal;
     
@@ -94,8 +95,13 @@ public class EquipeP {
             afficheDijkstra(distanceALarbitre);
             System.out.println("\nDijkstra de distanceDepuisArbitre :");
             afficheDijkstra(distanceDepuisArbitre);
-        
-            afficheTab(tabDistAllerRetour);
+
+            System.out.println("\nDijkstra Aller Retour :");
+            afficheDijkstra(tabDistAllerRetour);
+
+            System.out.println("\nDijkstra tabTri :");
+            afficheDijkstra(tabTri);
+
             
         } catch (IOException e) {
             e.printStackTrace();
@@ -247,12 +253,10 @@ public class EquipeP {
        distanceDepuisArbitre=Dijkstra(Arbitre,tabDistances);
        distanceALarbitre=DijkstraInv(Arbitre,tabDistances);
 
-       tabDistAllerRetour = new int[distanceALarbitre.length][distanceALarbitre.length];
+       tabDistAllerRetour = new int[distanceALarbitre.length];
 
        for (int i = 0; i<tabDistAllerRetour.length; i++) {
-           for (int j = 0; j<tabDistAllerRetour.length; j++){
-                tabDistAllerRetour[i][j] = distanceALarbitre[i] + distanceDepuisArbitre[j];
-           }
+          tabDistAllerRetour[i] = distanceALarbitre[i] + distanceDepuisArbitre[i];
        }
     }
 
@@ -337,17 +341,74 @@ public class EquipeP {
         distanceALarbitre=DijkstraInv(m+1, tabInt);
         
     }
-    public static int cout(){
-        for(int i=0;i<equipes.length;i++){
-            for(int j=0;j<equipes.length;j++){
-                
+    public static int coutAjout(int numSommet, int[] team){
+        int taille =team.length;
+        int poids=tabDistAllerRetour[numSommet];
+        int cout=poids*taille*2;
+        return cout;
+    }
+    public static void trier(int[] tableau) {
+        for (int i = 0; i < tableau.length - 1; i++) {
+            // Trouver l'index du minimum dans le reste du tableau
+            int indexMin = i;
+            for (int j = i + 1; j < tableau.length; j++) {
+                if (tableau[j] < tableau[indexMin]) {
+                    indexMin = j;
+                }
+            }
+            
+            // Échanger l'élément actuel avec l'élément le plus petit trouvé
+            int temp = tableau[i];
+            tableau[i] = tableau[indexMin];
+            tableau[indexMin] = temp;
+        }
+    }
+
+    public static int[][] copie(int[][]tab){
+        int taille =tab.length;
+        int [][]copie=new int[taille][];
+        for(int i=0;i<taille;i++){
+            copie[i]=new int[tab[i].length];
+            for(int j=0;j<tab[j].length;j++){
+                copie[i][j]=tab[i][j];
             }
         }
-        return 0;
+        return copie;
+    }
+    public static int[] copie(int[]tab){
+        int taille =tab.length;
+        int []copie=new int[taille];
+        for(int i=0;i<taille;i++){
+            copie[i]=tab[i];
+        }
+        return copie;
+    }
+    public static void InitTri(){
+        int taille=tabDistAllerRetour.length;
+        tabTri=copie(tabDistAllerRetour);
+        trier(tabTri);
+    }
+    public static void repartition(){
+        equipes=new int[p][];
+        
+
+
+    }
+
+    public static int coutTotal(){
+        int taille=equipes.length;
+        int coutTot=0;
+        for(int i=0;i<taille;i++){
+            int tailleJ=equipes[i].length;
+            for(int j=0;j<tailleJ;j++){
+                coutTot+=tabDistAllerRetour[equipes[i][j]]*(tailleJ-1)*2;                                                                                                                        
+            }
+        }
+        return coutTot;
     }
 
     public static int solution(){
-        return 0;
+        return coutTotal();
     }
 
     
