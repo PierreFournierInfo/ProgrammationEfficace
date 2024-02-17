@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
+import java.util.ArrayList;
 public class EquipeP {
    
     private static String FILENAME ;
@@ -25,7 +25,7 @@ public class EquipeP {
     private static int[] distanceDepuisArbitre;
     private static int[] tabDistAllerRetour;
     private static int[] tabTri;
-    public static int[][] equipes;
+    public static ArrayList<Integer>[] equipes;
     private static int coutMinimal;
     
 
@@ -75,18 +75,7 @@ public class EquipeP {
             
             tabInt=convert(tabString);
 
-            //*********On trouve la solution au problème et la renvoie dans un fichier de sortie *******************/
-
-            coutMinimal=solution();
-
-            String nomFichier =  FILENAME+".out.txt"; // Nom du fichier de sortie
-            //System.out.println("\n Nombre de recettes possibles "+nombreRecettes);
-            FileWriter fileWriter = new FileWriter(nomFichier, true);
-            PrintWriter printWriter = new PrintWriter(fileWriter);
-
-            printWriter.println("Cout minimal : " + coutMinimal); // Écrit le paramètre dans le fichier
-            printWriter.close(); // Ferme le PrintWriter pour libérer les ressources
-
+            
             //Initialisation des distance depuis l'arbitre et jusqu a l arbitre
 
             initDistancesArbitre();
@@ -99,8 +88,28 @@ public class EquipeP {
             System.out.println("\nDijkstra Aller Retour :");
             afficheDijkstra(tabDistAllerRetour);
 
+            InitTri();
             System.out.println("\nDijkstra tabTri :");
             afficheDijkstra(tabTri);
+           
+
+            //*********On trouve la solution au problème et la renvoie dans un fichier de sortie *******************/
+            InitEquipes();
+            repartition();
+            coutMinimal=solution();
+
+            afficheEquipes();
+
+            String nomFichier =  FILENAME+".out.txt"; // Nom du fichier de sortie
+            //System.out.println("\n Nombre de recettes possibles "+nombreRecettes);
+            FileWriter fileWriter = new FileWriter(nomFichier, true);
+            PrintWriter printWriter = new PrintWriter(fileWriter);
+
+            printWriter.println("Cout minimal : " + coutMinimal); // Écrit le paramètre dans le fichier
+            printWriter.close(); // Ferme le PrintWriter pour libérer les ressources
+
+
+
 
             
         } catch (IOException e) {
@@ -388,20 +397,42 @@ public class EquipeP {
         tabTri=copie(tabDistAllerRetour);
         trier(tabTri);
     }
+
+    @SuppressWarnings("unchecked")
+    public static void InitEquipes(){
+        equipes=new ArrayList[p];
+        for(int i=0;i<p ;i++){
+            equipes[i]=new ArrayList<Integer>();
+        }
+    }
+   
+
     public static void repartition(){
-        equipes=new int[p][];
+        int repere=0;
+        for(int i=0;i<m ;i++){
+            equipes[repere].add(i+1);
+            repere=(repere+1)%p;
+        }
+    }
+    public static void afficheEquipes(){
+        int taille=equipes.length;
+        for(int i=0;i<taille;i++){
+            System.out.println("equipe "+i);
+            for(int j=0;j<equipes[i].size();j++){
+                System.out.print(equipes[i].get(j)+" ");
+            }
+            System.out.println();
+        }
         
-
-
     }
 
     public static int coutTotal(){
         int taille=equipes.length;
         int coutTot=0;
         for(int i=0;i<taille;i++){
-            int tailleJ=equipes[i].length;
+            int tailleJ=equipes[i].size();
             for(int j=0;j<tailleJ;j++){
-                coutTot+=tabDistAllerRetour[equipes[i][j]]*(tailleJ-1)*2;                                                                                                                        
+                coutTot+=tabDistAllerRetour[equipes[i].get(j)]*(tailleJ-1)*2;                                                                                                                        
             }
         }
         return coutTot;
