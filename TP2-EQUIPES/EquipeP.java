@@ -229,10 +229,12 @@ public class EquipeP {
             p = Integer.parseInt(result[2]);
             r = Integer.parseInt(result[3]);
 
-            tab = new int[m+1][m+1];
+            System.out.println(n + " " + m + " " + p + " " + r + " ");
 
-            for (int i = 0; i < m+1 ; i ++ ) {
-                for ( int j = 0; j < m+1 ; j ++ ){
+            tab = new int[n][n];
+
+            for (int i = 0; i < n ; i ++ ) {
+                for ( int j = 0; j < n ; j ++ ){
                     tab[i][j] = -1;
                 }
             }
@@ -243,6 +245,8 @@ public class EquipeP {
                 x = Integer.parseInt(result[0]);
                 y = Integer.parseInt(result[1]);
                 l = Integer.parseInt(result[2]);
+
+                System.out.println(x + " " + y + " " + l );
 
                 tab[x-1][y-1] = l;
 
