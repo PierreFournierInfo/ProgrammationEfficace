@@ -351,10 +351,14 @@ public class EquipeP {
         distanceALarbitre=DijkstraInv(m+1, tabInt);
         
     }
-    public static int coutAjout(int numSommet, int[] team){
-        int taille =team.length;
-        int poids=tabDistAllerRetour[numSommet];
-        int cout=poids*taille*2;
+    public static int coutAjout(int numSommet, int indiceEquipe){
+        int cout=0;
+        int taille=equipes[indiceEquipe].size();
+        for(int i=0;i<taille;i++){
+            int poids=tabDistAllerRetour[i];
+            cout+=poids*taille;
+        }
+        cout+=tabDistAllerRetour[numSommet]*taille;
         return cout;
     }
     public static void trier(int[] tableau) {
@@ -443,7 +447,7 @@ public class EquipeP {
                                                                                                                        
             }
         }
-        System.out.println("CoutTotal final: "+ coutTot);
+        //System.out.println("CoutTotal final: "+ coutTot);
         return coutTot;
     }
 
