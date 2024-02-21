@@ -94,7 +94,7 @@ public class EquipeP {
             System.out.println("\nDijkstra Aller Retour :");
             afficheDijkstra(tabDistAllerRetour);
             */
-
+            
             InitTri();
             //System.out.println("\nDijkstra tabTri :");
             //afficheDijkstra(tabTri);
