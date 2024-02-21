@@ -9,3 +9,7 @@ Cout minimal : 0
 Cout minimal : 0
 Cout minimal : 20
 Cout minimal : 20
+Cout minimal : 10
+Cout minimal : 10
+Cout minimal : 10
+Cout minimal : 13

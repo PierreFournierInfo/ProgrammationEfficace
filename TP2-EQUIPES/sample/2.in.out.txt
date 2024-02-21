@@ -1,0 +1,2 @@
+Cout minimal : 46
+Cout minimal : 23

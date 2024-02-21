@@ -26,6 +26,7 @@ public class EquipeP {
     private static int[] tabDistAllerRetour;
     private static int[] tabTri;
     public static ArrayList<Integer>[] equipes;
+    public static int[]coutEquipes;
     private static int coutMinimal;
     
 
@@ -427,14 +428,22 @@ public class EquipeP {
     }
 
     public static int coutTotal(){
+        //System.out.println("Calcul coutTotal");
         int taille=equipes.length;
+        //System.out.println("nombre d'equipes: "+taille);
         int coutTot=0;
         for(int i=0;i<taille;i++){
             int tailleJ=equipes[i].size();
+            //System.out.println("taille de l equipe "+i+" "+tailleJ);
             for(int j=0;j<tailleJ;j++){
-                coutTot+=tabDistAllerRetour[equipes[i].get(j)]*(tailleJ-1)*2;                                                                                                                        
+                //System.out.println("tabAllerRetour[equipe["+i+"].get("+j+")]=" + tabDistAllerRetour[equipes[i].get(j)]);
+                //System.out.println("equipe["+i+"].get("+j+")"+equipes[i].get(j));
+                coutTot+=tabDistAllerRetour[equipes[i].get(j)-1]*(tailleJ-1); 
+                //System.out.println("coutTotal:" +coutTot);
+                                                                                                                       
             }
         }
+        System.out.println("CoutTotal final: "+ coutTot);
         return coutTot;
     }
 
