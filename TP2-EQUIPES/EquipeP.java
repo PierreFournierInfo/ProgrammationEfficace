@@ -39,8 +39,8 @@ public class EquipeP {
             //**********************On lit l'adresse l'adresse du fichier passé en argument*********************************
             FILENAME=args[0];
             tabDistances=initTabDistances(FILENAME);
-            System.out.println("Le Graphe d'origine");
-            afficheTab(tabDistances);
+            //System.out.println("Le Graphe d'origine");
+            //afficheTab(tabDistances);
 
 
 
@@ -56,7 +56,8 @@ public class EquipeP {
 
             Arbitre=m+1;
 
-            
+
+            /* 
 
             //*************On lit ligne par ligne et les stocke dans un tableau de String**********************
             String [] tab;
@@ -69,18 +70,22 @@ public class EquipeP {
             }
             bufferedreader.close();
 
+            */
+
             //******On sépare les mots de chaque ligne dans un tableau de tableau de String ****************/
-            tabString=parse(tab);
+            //tabString=parse(tab);
             
             //******On converti le tableau de tableau de String en Tableau de Tableau de Int ***************/
             
-            tabInt=convert(tabString);
+            //tabInt=convert(tabString);
+            
 
             
             //Initialisation des distance depuis l'arbitre et jusqu a l arbitre
 
             initDistancesArbitre();
 
+            /* 
             System.out.println("\nDijkstra de distanceALarbitre :");
             afficheDijkstra(distanceALarbitre);
             System.out.println("\nDijkstra de distanceDepuisArbitre :");
@@ -88,10 +93,11 @@ public class EquipeP {
 
             System.out.println("\nDijkstra Aller Retour :");
             afficheDijkstra(tabDistAllerRetour);
+            */
 
             InitTri();
-            System.out.println("\nDijkstra tabTri :");
-            afficheDijkstra(tabTri);
+            //System.out.println("\nDijkstra tabTri :");
+            //afficheDijkstra(tabTri);
            
 
             //*********On trouve la solution au problème et la renvoie dans un fichier de sortie *******************/
@@ -229,7 +235,7 @@ public class EquipeP {
             p = Integer.parseInt(result[2]);
             r = Integer.parseInt(result[3]);
 
-            System.out.println(n + " " + m + " " + p + " " + r + " ");
+            //System.out.println(n + " " + m + " " + p + " " + r + " ");
 
             tab = new int[n][n];
 
@@ -246,7 +252,7 @@ public class EquipeP {
                 y = Integer.parseInt(result[1]);
                 l = Integer.parseInt(result[2]);
 
-                System.out.println(x + " " + y + " " + l );
+                //System.out.println(x + " " + y + " " + l );
 
                 tab[x-1][y-1] = l;
 

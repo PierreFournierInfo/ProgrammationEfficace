@@ -1,0 +1,2 @@
+Cout minimal : 80008
+Cout minimal : 80008

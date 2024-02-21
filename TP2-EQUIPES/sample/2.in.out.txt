@@ -2,3 +2,4 @@ Cout minimal : 46
 Cout minimal : 23
 Cout minimal : 26
 Cout minimal : 26
+Cout minimal : 26
