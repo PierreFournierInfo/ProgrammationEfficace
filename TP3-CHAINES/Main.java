@@ -48,10 +48,24 @@ public class Main{
 
             chaine = line.replace("#", "");
 
+            bufferedReader.close();
+            fileReader.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
+
 	}
+
+	public static boolean isDoable(){
+		for ( String sousChaine : tabSousChaines ){
+			if ( !chaine.contains(sousChaine) ){
+				return false;
+			}
+		}
+		return true;
+	}
+
 	public static void main(String[] args) {
 		FILENAME=args[0];
 		
@@ -62,12 +76,15 @@ public class Main{
 		}
 		System.out.println("\n" + chaine);
 
+		System.out.println("Doable: " + isDoable());
+
 		try{
 			String nomFichier =  FILENAME+".out.txt"; // Nom du fichier de sortie
             FileWriter fileWriter = new FileWriter(nomFichier, true);
             PrintWriter printWriter = new PrintWriter(fileWriter);
 
-            printWriter.println("Reponse"); // Écrit le paramètre dans le fichier
+           printWriter.println("reponse");
+
             printWriter.close(); // Ferme le PrintWriter pour libérer les ressources
 		}catch(IOException e) {
             e.printStackTrace();
