@@ -25,16 +25,13 @@ public class Main{
             tabSousChaines = new String[nbrSousChaines];
 
             for ( int i = 0; i < nbrSousChaines; i++ ){
+            	line = bufferedReader.readLine();
 
+            	tabSousChaines[i] = line.replace("#", "");
             }
 
             line = bufferedReader.readLine();
-            while ( line != null ){
-
-
-            	line = bufferedReader.readLine();
-            }
-
+            chaine = line.replace("#", "");
         } catch (IOException e) {
             e.printStackTrace();
         }
