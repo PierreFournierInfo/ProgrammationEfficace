@@ -12,6 +12,9 @@ public class Main{
 	private static String[] tabSousChaines;
 	private static String chaine;
 	private static int nbrSousChaines;
+	private static String FILENAME;
+
+	
 
 	public static void parse(String file){
 
@@ -32,12 +35,17 @@ public class Main{
 
             line = bufferedReader.readLine();
             chaine = line.replace("#", "");
+
+			
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 	}
 
 	public static void main(String[] args) {
+		FILENAME=args[0];
+		
 		parse(args[0]);
 
 		for ( String s : tabSousChaines ) {
@@ -45,6 +53,16 @@ public class Main{
 		}
 		System.out.println("\n" + chaine);
 
+		try{
+			String nomFichier =  FILENAME+".out.txt"; // Nom du fichier de sortie
+            //System.out.println("\n Nombre de recettes possibles "+nombreRecettes);
+            FileWriter fileWriter = new FileWriter(nomFichier, true);
+            PrintWriter printWriter = new PrintWriter(fileWriter);
 
+            printWriter.println("Reponse"); // Écrit le paramètre dans le fichier
+            printWriter.close(); // Ferme le PrintWriter pour libérer les ressources
+		}catch(IOException e) {
+            e.printStackTrace();
+        }
 	}
 }
