@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.LinkedList;
 public class EquipeP {
    
     private static String FILENAME ;
@@ -503,7 +504,7 @@ public class EquipeP {
     public LinkedList<Integer>[] init(int nombreequipe, int[] joueur){
         // initialise les equipes en ajoutant un joueur par equipe
         LinkedList<Integer>[] equipe = new LinkedList[nombreequipe];
-        for(int i = 0; i< nombreequipe; i++){
+        for(int i = nombreequipe -1; i => 0; i--){
             equipe[i] = new LinkedList<Integer>();
             equipe[i].add(joueur[i]);
         }
