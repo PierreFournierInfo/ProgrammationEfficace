@@ -29,20 +29,29 @@ public class Main{
 
             for ( int i = 0; i < nbrSousChaines; i++ ){
             	line = bufferedReader.readLine();
+            	tabSousChaines[i] = "";
 
-            	tabSousChaines[i] = line.replace("#", "");
+            	while ( !line.contains("#") ){
+            		tabSousChaines[i] = tabSousChaines[i] + line;
+            		line = bufferedReader.readLine();
+            	}
+
+            	tabSousChaines[i] = tabSousChaines[i] + line.replace("#", "");
             }
 
             line = bufferedReader.readLine();
-            chaine = line.replace("#", "");
 
-			
+            while ( !line.contains("#") ){
+            	chaine = chaine + line;
+            	line = bufferedReader.readLine();
+            }
+
+            chaine = line.replace("#", "");
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 	}
-
 	public static void main(String[] args) {
 		FILENAME=args[0];
 		
@@ -55,7 +64,6 @@ public class Main{
 
 		try{
 			String nomFichier =  FILENAME+".out.txt"; // Nom du fichier de sortie
-            //System.out.println("\n Nombre de recettes possibles "+nombreRecettes);
             FileWriter fileWriter = new FileWriter(nomFichier, true);
             PrintWriter printWriter = new PrintWriter(fileWriter);
 
