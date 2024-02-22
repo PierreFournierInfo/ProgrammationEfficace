@@ -465,7 +465,73 @@ public class EquipeP {
         return coutTotal();
     }
 
-    
+    /*
+     * retourne l'equipe optimal ajouté au joueur
+     */
+    public LinkedList<Integer>[] ajoutJ(LinkedList<Integer>[] equipe, int joueur){
+        equipe[0].addLast(joueur);
+        for(int i = 0; i< equipe.length -1; i++){
+            LinkedList<Integer> nouvequipe1 = (LinkedList) equipe[i].clone();
+            LinkedList<Integer> nouvequipe2 = (LinkedList) equipe[i+1].clone();
+            nouvequipe1.addLast(nouvequipe2.removeFirst());
+            if(value(nouvequipe1) + value(nouvequipe2) <= value(equipe[i]) + value(equipe[i+1])){
+                equipe[i] = nouvequipe1;
+                equipe[i+1] = nouvequipe2;
+            }
+            else{
+                return equipe;
+            }
+        }
+        return equipe;
+
+    }
+
+    /*
+     * retourne l'equipe optimal ajouté aux joueur
+     */
+    public LinkedList<Integer>[] ajoutAllJ(LinkedList<Integer>[] equipe, int[] joueur){
+        for (int i : joueur) {
+            ajoutJ(equipe, i);
+        }
+        return equipe;
+    }
+
+    /*
+     * retourne l'equipe optimal
+     * joueur est la list des joueur a ajouté en ordre de coût decroissant
+     */
+    public LinkedList<Integer>[] init(int nombreequipe, int[] joueur){
+        // initialise les equipes en ajoutant un joueur par equipe
+        LinkedList<Integer>[] equipe = new LinkedList[nombreequipe];
+        for(int i = 0; i< nombreequipe; i++){
+            equipe[i] = new LinkedList<Integer>();
+            equipe[i].add(joueur[i]);
+        }
+
+        int[] jRestant = new int[joueur.length - nombreequipe];
+        for(int i = 0; i< jRestant.length; i++){
+            jRestant[i] = joueur[i+nombreequipe];
+        }
+        
+        equipe = ajoutAllJ(equipe, jRestant);
+        return equipe;
+    }
+
+
+   
+
+    /*
+     * retourne la valeur des echanges d'un groupe de joueur
+     */
+    public static int value(LinkedList<Integer> list){
+        int val = 0;
+        int l = list.size() - 1;
+        for (int v : list) {
+            val += v*l;
+        }
+        return val;
+
+    }
 
 
 
