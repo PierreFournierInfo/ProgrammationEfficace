@@ -14,7 +14,7 @@ public class Maxime{
             return min - mot;
     }
 
-    public static int[] find(List<Integer>[] motif){
+    public static int[] find(List<Integer>[] motif, String[] tabSousChaines){
         int[] possibiliter = new int[4];
         for (int k = 0; k<motif[0].size(); k++) {
             int min = motif[0].get(k);
