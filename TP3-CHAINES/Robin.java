@@ -66,6 +66,86 @@ public class Robin {
         }
     }
 
+    public static int abs(int v){
+        if(v < 0) return -v;
+        return v;
+    }
+
+    public static int distancev2(int min, int max, int mot, int motindex){
+        int t = tabSousChaines[motindex].length() + mot ;
+        if(mot < max && min < mot){
+            return abs(max - min);
+        }
+        if(mot > max)
+            return t - max;
+        else
+            return min - mot;
+    }
+
+    public static void solution(){
+        String sol = "";
+        int pos = 0;
+        int l = chaine.length();
+        int max = 0;
+        int min = 0;
+        for(int i = 0; i < motif[0].size(); i++){
+            int dist = 0;
+            max = motif[0].get(i);
+            min = 0;
+            for(int j = 1; j < motif.length; j++){ 
+                int mot = motif[j].get(0);
+                if(j == 1){
+                    if(mot > max){
+                        min = max;
+                        max = mot;
+                    }else{
+                        min = mot;
+                    }
+                }else{
+                    if(mot > max)max = mot;
+                    if(mot < min)min = mot;
+                }
+                dist = abs(max - min);  
+                for(int y = 1; y < motif[j].size(); y++){
+                    mot = motif[j].get(y);
+                    if(j == 1){
+                        if(abs(mot - min) < dist)max = mot;
+                        continue;
+                    }
+                    if(dist > distancev2(min, max, mot, j)){
+                        dist = distancev2(min, max, mot, j);
+                        if(mot < min){
+                            max = min;
+                            min = mot;
+                        }
+                        if(mot > max){
+                            min = max;
+                            max = mot;
+                        }
+                    }
+                }
+            }
+            if(l > dist)l = dist;
+        }
+        sol = sousChaineMin(min, max);
+        System.out.println("(" + sol + ", " + l + ", " + min + ")");
+    }
+
+   public static String sousChaineMin(int min, int max){
+        String sol = "";
+        for(int i = min; i < max; i++){
+            sol = sol + chaine.charAt(i);
+        }
+        String fin = "";
+        for(int i = 0; i < tabSousChaines.length; i++){
+            if(estPresent(tabSousChaines[i], max)){
+                fin = tabSousChaines[i];
+            }
+        }
+        sol = sol + fin; 
+        return sol;
+    }
+
 	public static void main(String[] args) {
 		parse(args[0]);
 
@@ -76,6 +156,7 @@ public class Robin {
 
         parcours();
         afficheMotif();
+        solution();
 	}
 
 
