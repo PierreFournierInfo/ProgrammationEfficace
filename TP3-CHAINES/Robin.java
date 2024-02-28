@@ -73,78 +73,71 @@ public class Robin {
         return v;
     }
 
-    public static int distancev2(int min, int max, int mot, int motindex){
-        int t = tabSousChaines[motindex].length() + mot ;
+    public static int distance(int min, int max, int mot, int motindex){
+        int t = tabSousChaines[motindex].length() + mot -1;
         if(mot < max && min < mot){
             return abs(max - min);
         }
         if(mot > max)
-            return abs(t - max);
+            return abs(t - min);
         else
             return abs(max - mot);
     }
 
     public static void solution(){
         String sol = "";
-        int pos = 0;
         int l = chaine.length();
-        int max = 0;
-        int min = 0;
+        int deb = 0;
+        int fin = 0;
         for(int i = 0; i < motif[0].size(); i++){
-            int dist = 0;
-            max = motif[0].get(i);
-            min = 0;
-            for(int j = 1; j < motif.length; j++){ 
-                int mot = motif[j].get(0);
-                if(j == 1){
-                    if(mot > max){
-                        min = max;
-                        max = mot;
-                    }else{
-                        min = mot;
-                    }
-                }else{
-                    if(mot > max)max = mot;
-                    if(mot < min)min = mot;
+            int a = motif[0].get(i);
+            int b = 0;
+            int dist = chaine.length();
+            for(int j = 0; j < motif[1].size(); j++){ 
+                int mot = motif[1].get(j);
+                if(abs(a-mot) < dist){
+                    b = mot;     
+                    dist = abs(a-b);
                 }
-                dist = abs(max - min);  
-                for(int y = 1; y < motif[j].size(); y++){
-                    mot = motif[j].get(y);
-                    if(j == 1){
-                        if(abs(mot - min) < dist)max = mot;
-                        continue;
-                    }
-                    if(dist > distancev2(min, max, mot, j)){
-                        dist = distancev2(min, max, mot, j);
-                        if(mot < min){
-                            max = min;
-                            min = mot;
+            }
+           
+            if(a > b){
+                int tmp = a;
+                a = b;
+                b = tmp;
+            }
+           
+            for(int j = 2; j < motif.length; j++){
+                for(Integer pos : motif[j]){
+                    dist = distance(a, b, pos, j);
+                    if(dist < l){
+                        //System.out.println("a: " + a + " b: " + b + " pos: " + pos + " dist: " + dist);
+                        l = dist;
+                        if(pos > b){
+                            fin = pos + tabSousChaines[j].length() - 1;
+                            deb = a;
                         }
-                        if(mot > max){
-                            min = max;
-                            max = mot;
+                        else {
+                            fin = b;
+                            deb = pos;
                         }
+                        //System.out.println("deb: " + deb + " fin: " + fin);
                     }
                 }
             }
-            if(l > dist)l = dist;
+
         }
-        sol = sousChaineMin(min, max);
+        sol = sousChaineMin(deb, fin);
         l = sol.length();
-        System.out.println("(" + sol + ", " + l + ", " + min + ")");
+        System.out.println("(" + sol + ", " + l + ", " + deb + ")");
     }
 
    public static String sousChaineMin(int min, int max){
         String sol = "";
-        for(int i = min; i < max; i++){
+        for(int i = min; i <= max; i++){
             sol = sol + chaine.charAt(i);
         }
         String fin = "";
-        for(int i = 0; i < tabSousChaines.length; i++){
-            if(estPresent(tabSousChaines[i], max)){
-                fin = tabSousChaines[i];
-            }
-        }
         sol = sol + fin; 
         return sol;
     }
