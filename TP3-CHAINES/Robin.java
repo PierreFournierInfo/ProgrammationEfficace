@@ -49,9 +49,11 @@ public class Robin {
         }
         for(int i = 0; i < chaine.length(); i++){
             for(int j = 0; j < tabSousChaines.length; j++){
-                if(estPresent(tabSousChaines[j], i)){
-                    motif[j].add(i);
-                    break;
+                if(chaine.length() - i  >= tabSousChaines[j].length()){
+                    if(estPresent(tabSousChaines[j], i)){
+                        motif[j].add(i);
+                        break;
+                    }
                 }
             }
         }
@@ -77,9 +79,9 @@ public class Robin {
             return abs(max - min);
         }
         if(mot > max)
-            return t - max;
+            return abs(t - max);
         else
-            return min - mot;
+            return abs(max - mot);
     }
 
     public static void solution(){
@@ -128,6 +130,7 @@ public class Robin {
             if(l > dist)l = dist;
         }
         sol = sousChaineMin(min, max);
+        l = sol.length();
         System.out.println("(" + sol + ", " + l + ", " + min + ")");
     }
 
