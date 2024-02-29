@@ -13,7 +13,7 @@ import java.util.List;
 public class Main{
 
 	private static String[] tabSousChaines;
-	private static String chaine;
+	private static String chaine = "";
 	private static int nbrSousChaines;
 	private static String FILENAME;
 	private static ArrayList<Integer>[] motif; 
@@ -34,12 +34,12 @@ public class Main{
 
         //Affichage test
 
-		// for ( String s : tabSousChaines ) {
-		// 	System.out.print(s + " ");
-		// }
-		// System.out.println("\nChaine:\n" + chaine);
+		for ( String s : tabSousChaines ) {
+			System.out.print(s + " ");
+		}
+		System.out.println("\nChaine:\n" + chaine);
 
-		// System.out.println("Doable: " + isDoable());
+		System.out.println("Doable: " + isDoable());
         
 
 		try{
