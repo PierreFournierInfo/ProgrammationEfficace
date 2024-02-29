@@ -33,13 +33,13 @@ public class Main{
 		parse(args[0]);
 
         //Affichage test
-
+/* 
 		for ( String s : tabSousChaines ) {
 			System.out.print(s + " ");
 		}
 		System.out.println("\nChaine:\n" + chaine);
 
-		System.out.println("Doable: " + isDoable());
+		System.out.println("Doable: " + isDoable());*/
         
 
 		try{
@@ -193,28 +193,31 @@ public class Main{
                 a = b;
                 b = tmp;
             }
-           
-            for(int j = 2; j < motif.length; j++){
+
+            for(int j = 2; j < motif.length; j++){      
                 for(Integer pos : motif[j]){
                     dist = distance(a, b, pos, j);
                     if(dist < l){
-                        //System.out.println("a: " + a + " b: " + b + " pos: " + pos + " dist: " + dist);
                         l = dist;
+                        //System.out.println("a: " + a + " b: " + b + " pos: " + pos + " dist: " + dist);                       
                         if(pos > b){
                             fin = pos + tabSousChaines[j].length() - 1;
                             deb = a;
                         }
-                        else {
-                            fin = b;
-                            deb = pos;
+                        else{
+                            fin = b + tabSousChaines[0].length() - 1;
+                            if(pos < a)deb = pos;
+                            else deb = a;
                         }
                         //System.out.println("deb: " + deb + " fin: " + fin);
                     }
                 }
+                a = deb;
+                b = fin;
             }
-
         }
         resultat = sousChaineMin(deb, fin);
+        //System.out.println(resultat);
         taille = resultat.length();
         debut=deb;
     }
@@ -226,7 +229,14 @@ public class Main{
         for(int i = min; i <= max; i++){
             sol = sol + chaine.charAt(i);
         }
-        String fin = "";
+        String fin = "";      
+/*     for(int i = 0; i < tabSousChaines.length; i++){
+            if(estPresent(tabSousChaines[i], max)){
+                fin = tabSousChaines[i];
+                break;
+            }        
+        }
+        */
         sol = sol + fin; 
         return sol;
     }
