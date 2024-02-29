@@ -34,14 +34,12 @@ public class Main{
 
         //Affichage test
 
-        /* 
-		for ( String s : tabSousChaines ) {
-			System.out.print(s + " ");
-		}
-		System.out.println("\n" + chaine);
+		// for ( String s : tabSousChaines ) {
+		// 	System.out.print(s + " ");
+		// }
+		// System.out.println("\nChaine:\n" + chaine);
 
-		System.out.println("Doable: " + isDoable());
-        */
+		// System.out.println("Doable: " + isDoable());
         
 
 		try{
@@ -102,7 +100,7 @@ public class Main{
             	line = bufferedReader.readLine();
             }
 
-            chaine = line.replace("#", "");
+            chaine = chaine + line.replace("#", "");
 
             bufferedReader.close();
             fileReader.close();
