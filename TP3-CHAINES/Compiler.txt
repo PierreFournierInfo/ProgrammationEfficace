@@ -1,0 +1,7 @@
+javac Main.java
+
+pour tester le fichier i.in: 
+
+java Main sample1/i.in
+
+la réponse apparait dans le fichier sample1/i.in.out.txt
