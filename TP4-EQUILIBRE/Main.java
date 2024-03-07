@@ -113,24 +113,22 @@ public class Main{
         return true;
     }
 
-	private static int freqActuelle(int i){
-        int som = 0;
-        for(Integer p : mosaique){
-            if(i == p)som++;
-        }
-        return som;
+	private static double freqActuelle(int i){
+        return quantite[i]/k;
     }
 
     public static int estTropBasse(){
-        int min = 1000000; 
+        double min = -1; 
         int sol = 0;
-        for(int i = 1; i < m+1; i++){
-            int diff = proportions[i] - freqActuelle(i);
-            if( diff < min){
+        for(int i = 0; i < m; i++){
+            double diff = proportions[i] - freqActuelle(i);
+            if( diff > min){
                 min = diff;
+				
                 sol = i;
             } 
         }
+		System.out.println("sol:"+sol);
         return sol;
     }
 
@@ -142,6 +140,7 @@ public class Main{
 			if(!estEquilibre(copie)){
 				return k-tuilesInitiales;
 			}else{
+				System.out.println("k"+k);
 				quantite[ajout]=quantite[ajout]+1;
 				mosaique.add(ajout);
 				k++;
