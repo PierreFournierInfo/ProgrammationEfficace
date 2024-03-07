@@ -15,6 +15,7 @@ public class Main{
 	private static int m;//somme des ai
 	private static int k;
 	private static int n;
+	
 	private static ArrayList<Integer> mosaique = new ArrayList<Integer>(); 
 	private static int[] proportions;//f
 	private static int[] quantite;//s
@@ -101,6 +102,24 @@ public class Main{
         }
         return true;
     }
+
+	public static int ajoutTuile(){
+		for(int i=0; i<n-k;i++){
+			int ajout=estTropBasse();
+			int []copie=copie(quantite);
+			copie[ajout]=quantite[ajout]+1;
+			if(!estEquilibre(copie)){
+				return k;
+			}else{
+				quantite[ajout]=quantite[ajout]+1;
+				mosaique.add(ajout);
+				k++;
+			}	
+		}
+	}
+
+
+
 	public static int[] copie(int[]tab){
         int taille =tab.length;
         int []copie=new int[taille];
