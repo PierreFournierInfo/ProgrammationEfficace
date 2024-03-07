@@ -15,8 +15,6 @@ mkdir -p "$TMP_D"
 #ajouter la compilation
 javac Main.java
 
-java Main
-
 for in_file in "$IN_D"/*.in; do
     filename=$(basename "$in_file")
     file_ext="${filename%.*}"
