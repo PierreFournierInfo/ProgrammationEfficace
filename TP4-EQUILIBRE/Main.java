@@ -12,12 +12,12 @@ import java.util.List;
 
 public class Main{
 
-	private static int m;
+	private static int m;//somme des ai
 	private static int k;
 	private static int n;
 	private static ArrayList<Integer> mosaique = new ArrayList<Integer>(); 
-	private static int[] proportions;
-	private static int[] quantite;
+	private static int[] proportions;//f
+	private static int[] quantite;//s
 
 	@SuppressWarnings("unchecked")
     public static void parse(String file){
@@ -100,6 +100,14 @@ public class Main{
             }
         }
         return true;
+    }
+	public static int[] copie(int[]tab){
+        int taille =tab.length;
+        int []copie=new int[taille];
+        for(int i=0;i<taille;i++){
+            copie[i]=tab[i];
+        }
+        return copie;
     }
 
     
