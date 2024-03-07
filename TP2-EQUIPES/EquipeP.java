@@ -423,13 +423,35 @@ public class EquipeP {
     }
    
 
-    public static void repartition(){
+    public static void repartition1(){
         int repere=0;
         for(int i=0;i<m ;i++){
             equipes[repere].add(i+1);
             repere=(repere+1)%p;
         }
     }
+
+    //Tentative de comprehension du jeudi 29 février:
+    /* 
+    public static int somme(int indice){
+        int compte=0;
+        for(int i=0;i<equipes[indice].size();i++){
+            compte+=tabDistAllerRetour[i];
+        }
+        return compte;
+    }
+    public static void repartition(){
+        int[][] M=new int[p][n];
+        int[]S=new int[p];
+        for(int i=2;i<p;i++){
+            for(int j=i;j<n;j++){
+                M[i][j]=min(M[i-1][j-k]+(k-1)(somme(j)-somme(j-k)));
+            }
+        }
+    }
+    */
+
+
     public static void afficheEquipes(){
         int taille=equipes.length;
         for(int i=0;i<taille;i++){
@@ -501,22 +523,7 @@ public class EquipeP {
      * retourne l'equipe optimal
      * joueur est la list des joueur a ajouté en ordre de coût decroissant
      */
-    public LinkedList<Integer>[] init(int nombreequipe, int[] joueur){
-        // initialise les equipes en ajoutant un joueur par equipe
-        LinkedList<Integer>[] equipe = new LinkedList[nombreequipe];
-        for(int i = nombreequipe -1; i => 0; i--){
-            equipe[i] = new LinkedList<Integer>();
-            equipe[i].add(joueur[i]);
-        }
-
-        int[] jRestant = new int[joueur.length - nombreequipe];
-        for(int i = 0; i< jRestant.length; i++){
-            jRestant[i] = joueur[i+nombreequipe];
-        }
-        
-        equipe = ajoutAllJ(equipe, jRestant);
-        return equipe;
-    }
+    
 
 
    
