@@ -184,6 +184,7 @@ public class Pierre {
     //utilisés à un moment donné, et n = s1 + ... + sm. Alors la frise
     //est équilibrée si, à tout moment et pour chaque i, si est
     //strictement compris entre n·fi − 1 et n·fi + 1.
+
     public static boolean estEquilibre(int[]tab){
         for(int i=0;i<tab.length;i++){
             if(quantite[i]<=n*proportion[i]-1 || quantite[i]>=n*proportion[i]+1){
@@ -191,6 +192,15 @@ public class Pierre {
             }
         }
         return true;
+    }
+
+    public static int[] copie(int[]tab){
+        int taille =tab.length;
+        int []copie=new int[taille];
+        for(int i=0;i<taille;i++){
+            copie[i]=tab[i];
+        }
+        return copie;
     }
 
 
