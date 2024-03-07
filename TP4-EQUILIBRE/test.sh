@@ -30,7 +30,3 @@ for out_file in "$TMP_D"/*.out; do
         echo "Le fichier $filename n'est pas identique au fichier fourni :("
     fi
 done
-
-
-
-
