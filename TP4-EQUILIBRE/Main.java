@@ -103,6 +103,27 @@ public class Main{
         return true;
     }
 
+	private static int freqActuelle(int i){
+        int som = 0;
+        for(Integer p : mosaique){
+            if(i == p)som++;
+        }
+        return som;
+    }
+
+    public static int estTropBasse(){
+        int min = 1000000; 
+        int sol = 0;
+        for(int i = 1; i < m+1; i++){
+            int diff = proportions[i] - freqActuelle(i);
+            if( diff < min){
+                min = diff;
+                sol = i;
+            } 
+        }
+        return sol;
+    }
+
 	public static int ajoutTuile(){
 		for(int i=0; i<n-k;i++){
 			int ajout=estTropBasse();
