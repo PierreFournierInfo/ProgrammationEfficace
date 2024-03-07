@@ -87,4 +87,20 @@ public class Main{
 		printMosaique();
 		System.out.println();
 	}
+
+	//si le nombre de carreaux du modèle i
+    //utilisés à un moment donné, et n = s1 + ... + sm. Alors la frise
+    //est équilibrée si, à tout moment et pour chaque i, si est
+    //strictement compris entre n·fi − 1 et n·fi + 1.
+
+    public static boolean estEquilibre(int[]tab){
+        for(int i=0;i<tab.length;i++){
+            if(quantite[i]<=n*proportions[i]-1 || quantite[i]>=n*proportions[i]+1){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    
 }
