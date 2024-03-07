@@ -14,11 +14,13 @@ public class Main{
 
 	private static int m;//somme des ai
 	private static int k;
+	private static int tuilesInitiales;
 	private static int n;
 	
 	private static ArrayList<Integer> mosaique = new ArrayList<Integer>(); 
 	private static int[] proportions;//f
 	private static int[] quantite;//s
+
 
 	@SuppressWarnings("unchecked")
     public static void parse(String file){
@@ -34,6 +36,7 @@ public class Main{
             proportions = new int[m];
             quantite = new int[m];
             k = Integer.parseInt(result[1]);
+			tuilesInitiales=Integer.parseInt(result[1]);
 
             // 2nd line
             line = bufferedReader.readLine();
@@ -87,6 +90,13 @@ public class Main{
 		System.out.println();
 		printMosaique();
 		System.out.println();
+
+		int solution=ajoutTuile();
+		if(solution==-1){
+			System.out.println("forever"); 
+		}else{
+			System.out.println(solution);
+		}
 	}
 
 	//si le nombre de carreaux du modèle i
@@ -130,13 +140,14 @@ public class Main{
 			int []copie=copie(quantite);
 			copie[ajout]=quantite[ajout]+1;
 			if(!estEquilibre(copie)){
-				return k;
+				return k-tuilesInitiales;
 			}else{
 				quantite[ajout]=quantite[ajout]+1;
 				mosaique.add(ajout);
 				k++;
-			}	
+			}
 		}
+		return -1;
 	}
 
 
