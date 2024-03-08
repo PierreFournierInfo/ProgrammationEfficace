@@ -85,7 +85,7 @@ public class Main{
 
 	public static void main(String[] args) {
 		parse(args[0]);
-
+		/* 
 		System.out.println("m: " + m);
 		System.out.println("k: " + k);
 		System.out.println("n: " + n);
@@ -97,10 +97,11 @@ public class Main{
 		System.out.println();
 		printMosaique();
 		System.out.println();
+		*/
 
 		int solution=ajoutTuile();
 		if(solution==-1){
-			printMosaique();
+			//printMosaique();
 
 			System.out.println("forever"); 
 		}else{
@@ -114,31 +115,31 @@ public class Main{
     //strictement compris entre n·fi − 1 et n·fi + 1.
 
     public static boolean estEquilibre(int[]tab){
-		System.out.println("APPEL A EQUILIBRE_______________________________");
+		//System.out.println("APPEL A EQUILIBRE_______________________________");
         for(int i=0;i<tab.length;i++){
-			System.out.println("-----------i : "+i);
-			System.out.println("proportions");
-			printTab(proportions);
-			System.out.println("\n");
+			//System.out.println("-----------i : "+i);
+			//System.out.println("proportions");
+			//printTab(proportions);
+			//System.out.println("\n");
 			float fi=(float)proportions[i];
-			System.out.println("fi: "+fi);
+			//System.out.println("fi: "+fi);
 			float card=(float)(nInit);
-			System.out.println("card:" + card);
+			//System.out.println("card:" + card);
 			float frequence=fi/card;
-			System.out.println("frequence: "+ frequence);
+			//System.out.println("frequence: "+ frequence);
 			float frequenceAttendue=frequence*(k+1);
 
 
 			float si=tab[i];
 			
-			System.out.println("si : "+ (si));
-			System.out.println("(frequenceAttendue-1) : "+ (frequenceAttendue -1));
-			System.out.println("(frequenceAttendue+1) : "+ (frequenceAttendue +1));
+			//System.out.println("si : "+ (si));
+			//System.out.println("(frequenceAttendue-1) : "+ (frequenceAttendue -1));
+			//System.out.println("(frequenceAttendue+1) : "+ (frequenceAttendue +1));
 
 			
 			
             if(si<= frequenceAttendue-1 || si>= frequenceAttendue +1){
-				System.out.println("C'est Faux à l'indice :"+i);
+				//System.out.println("C'est Faux à l'indice :"+i);
 
 
 				
@@ -181,21 +182,21 @@ public class Main{
 		int limite =n-kInit;
 		for(int i=0; i<limite;i++){
 			int ajout=estTropBasse();
-			System.out.println("ajout: "+ajout);
+			//System.out.println("ajout: "+ajout);
 			int []copie=copie(quantite);
 			copie[ajout]=copie[ajout]+1;
-			System.out.println("copie");
+			//System.out.println("copie");
 
-			printTab(copie);
-			System.out.println("\n");
+			//printTab(copie);
+			//System.out.println("\n");
 
 			if(!estEquilibre(copie)){	
-				System.out.println("ici");			
+				//System.out.println("ici");			
 				return k-kInit;
 			}else{
-				System.out.println("là");			
+				//System.out.println("là");			
 				
-				System.out.println("k"+k);
+				//System.out.println("k"+k);
 				quantite[ajout]=quantite[ajout]+1;
 				mosaique.add(ajout+1);
 				k++;
