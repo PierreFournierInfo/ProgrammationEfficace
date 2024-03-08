@@ -55,12 +55,14 @@ public class Main{
 			nInit=n;
 
             // 3rd line
-            line = bufferedReader.readLine();
-            result = line.split(" ");
+            if ( k != 0 ){
+                line = bufferedReader.readLine();
+                result = line.split(" ");
 
-            for( int i = 0; i<result.length; i++ ){
-            	mosaique.add(Integer.parseInt(result[i]));
-            	quantite[(Integer.parseInt(result[i]))-1] += 1;
+                for( int i = 0; i<result.length; i++ ){
+                	mosaique.add(Integer.parseInt(result[i]));
+                	quantite[(Integer.parseInt(result[i]))-1] += 1;
+                }
             }
 
             bufferedReader.close();
