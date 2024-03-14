@@ -14,12 +14,18 @@ public class Main{
 
 	private static int m;//somme des ai
 	private static int k;
-	private static int tuilesInitiales;
+	private static int kInit;
 	private static int n;
+	private static int nInit;
+
 	
 	private static ArrayList<Integer> mosaique = new ArrayList<Integer>(); 
 	private static int[] proportions;//f
 	private static int[] quantite;//s
+	private static double[] proportionsDouble;
+	private static double[] proportionsActuelleDouble;
+
+
 
 
 	@SuppressWarnings("unchecked")
@@ -36,7 +42,7 @@ public class Main{
             proportions = new int[m];
             quantite = new int[m];
             k = Integer.parseInt(result[1]);
-			tuilesInitiales=Integer.parseInt(result[1]);
+			kInit=Integer.parseInt(result[1]);
 
             // 2nd line
             line = bufferedReader.readLine();
@@ -46,14 +52,17 @@ public class Main{
             	proportions[i] = Integer.parseInt(result[i]);
             	n = n + proportions[i];
             }
+			nInit=n;
 
             // 3rd line
-            line = bufferedReader.readLine();
-            result = line.split(" ");
+            if ( k != 0 ){
+                line = bufferedReader.readLine();
+                result = line.split(" ");
 
-            for( int i = 0; i<result.length; i++ ){
-            	mosaique.add(Integer.parseInt(result[i]));
-            	quantite[(Integer.parseInt(result[i]))-1] += 1;
+                for( int i = 0; i<result.length; i++ ){
+                	mosaique.add(Integer.parseInt(result[i]));
+                	quantite[(Integer.parseInt(result[i]))-1] += 1;
+                }
             }
 
             bufferedReader.close();
@@ -78,7 +87,7 @@ public class Main{
 
 	public static void main(String[] args) {
 		parse(args[0]);
-
+		/* 
 		System.out.println("m: " + m);
 		System.out.println("k: " + k);
 		System.out.println("n: " + n);
@@ -90,9 +99,12 @@ public class Main{
 		System.out.println();
 		printMosaique();
 		System.out.println();
+		*/
 
 		int solution=ajoutTuile();
 		if(solution==-1){
+			//printMosaique();
+
 			System.out.println("forever"); 
 		}else{
 			System.out.println(solution);
@@ -105,8 +117,35 @@ public class Main{
     //strictement compris entre n·fi − 1 et n·fi + 1.
 
     public static boolean estEquilibre(int[]tab){
+		//System.out.println("APPEL A EQUILIBRE_______________________________");
         for(int i=0;i<tab.length;i++){
-            if(quantite[i]<=n*proportions[i]-1 || quantite[i]>=n*proportions[i]+1){
+			//System.out.println("-----------i : "+i);
+			//System.out.println("proportions");
+			//printTab(proportions);
+			//System.out.println("\n");
+			float fi=(float)proportions[i];
+			//System.out.println("fi: "+fi);
+			float card=(float)(nInit);
+			//System.out.println("card:" + card);
+			float frequence=fi/card;
+			//System.out.println("frequence: "+ frequence);
+			float frequenceAttendue=frequence*(k+1);
+
+
+			float si=tab[i];
+			
+			//System.out.println("si : "+ (si));
+			//System.out.println("(frequenceAttendue-1) : "+ (frequenceAttendue -1));
+			//System.out.println("(frequenceAttendue+1) : "+ (frequenceAttendue +1));
+
+			
+			
+            if(si<= frequenceAttendue-1 || si>= frequenceAttendue +1){
+				//System.out.println("C'est Faux à l'indice :"+i);
+
+
+				
+
                 return false;
             }
         }
@@ -114,36 +153,56 @@ public class Main{
     }
 
 	private static double freqActuelle(int i){
-        return quantite[i]/k;
+        return quantite[i]/n;
     }
 
     public static int estTropBasse(){
-        double min = -1; 
+        double min = 99999; 
         int sol = 0;
         for(int i = 0; i < m; i++){
-            double diff = proportions[i] - freqActuelle(i);
-            if( diff > min){
+
+			
+			float fi=(float)proportions[i];
+			float card=(float)(nInit);
+			float frequence=fi/card;
+			float frequenceAttendue=frequence*(k+1);
+
+
+			float si=quantite[i];
+			float diff=si-frequenceAttendue;
+
+			if( diff < min){
                 min = diff;
 				
                 sol = i;
             } 
         }
-		System.out.println("sol:"+sol);
         return sol;
     }
 
 	public static int ajoutTuile(){
-		for(int i=0; i<n-k;i++){
+		int limite =n-kInit;
+		for(int i=0; i<limite;i++){
 			int ajout=estTropBasse();
+			//System.out.println("ajout: "+ajout);
 			int []copie=copie(quantite);
-			copie[ajout]=quantite[ajout]+1;
-			if(!estEquilibre(copie)){
-				return k-tuilesInitiales;
+			copie[ajout]=copie[ajout]+1;
+			//System.out.println("copie");
+
+			//printTab(copie);
+			//System.out.println("\n");
+
+			if(!estEquilibre(copie)){	
+				//System.out.println("ici");			
+				return k-kInit;
 			}else{
-				System.out.println("k"+k);
+				//System.out.println("là");			
+				
+				//System.out.println("k"+k);
 				quantite[ajout]=quantite[ajout]+1;
-				mosaique.add(ajout);
+				mosaique.add(ajout+1);
 				k++;
+				n++;
 			}
 		}
 		return -1;
