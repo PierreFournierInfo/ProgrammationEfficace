@@ -68,8 +68,25 @@ public class Main{
         }
         return ligne;
     }
-    public static String Compare(int n){
-        return "Oui";
+
+    public static String Compare( int n){
+        boolean b=false;
+        for(int i=0; i<n; i++){
+            b=false;
+            System.out.println("c");
+            for(int j=0; j<n; j++){
+                if(i!=j && tab[i].equals(tab[j])){
+                    System.out.println("ici");
+                    b=true;
+                }
+            }
+            if(b==false){
+                System.out.println("là");
+                return tab[i];
+            }
+            b=false;
+        }
+        return "ECHEC";
     }
 
 	
