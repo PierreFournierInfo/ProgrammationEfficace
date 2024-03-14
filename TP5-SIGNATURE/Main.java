@@ -14,14 +14,24 @@ public class Main{
 
 	private static String ligne;
     private static char[] alpha; /*{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'}; */
+    private static String[] tab;
+    private static int taille;
+
 
 	@SuppressWarnings("unchecked")
     public static void parse(String file){
     	try {
             FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
+            alpha = new char[26];
+            for(int i = 0; i < 26; i++){
+                alpha[i] = (char)(65 + i);
+            }
+		
 
            	ligne = bufferedReader.readLine();
+
+            taille=ligne.length();
 
             bufferedReader.close();
             fileReader.close();
@@ -29,15 +39,38 @@ public class Main{
             e.printStackTrace();
         }
     }
-
-	public static void main(String[] args) {
-        alpha = new char[26];
-        for(int i = 0; i < 26; i++){
-            alpha[i] = (char)(65 + i);
-        }
+    public static void main(String[] args) {
 		parse(args[0]);
+        taille=ligne.length();
 
 		System.out.println(ligne);
 	}
-  
+
+    public static String recherche(){
+        for(int a=0;a<taille;a++){
+            tab[a]=String.valueOf(ligne.charAt(a));
+            
+        }
+        if (Compare(taille)!="Echec"){
+            return Compare(taille);
+        }
+        for(int i=0; i<taille-1;i++){
+            
+            for(int j=0;j<taille-1;j++){
+                if(i+tab[i].length()<taille){ //REVOIR POTENTIELLEMENT ICI
+                    tab[i]+=ligne.charAt(j);
+                    
+                }
+            }
+            if (Compare(taille)!="Echec"){
+                return Compare(taille);
+            }
+        }
+        return ligne;
+    }
+    public static String Compare(int n){
+        return "Oui";
+    }
+
+	
 }
