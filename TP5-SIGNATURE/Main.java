@@ -44,6 +44,24 @@ public class Main{
         taille=ligne.length();
 
 		System.out.println(ligne);
+        taille=ligne.length();
+        tab=new String[taille];
+        //*********On trouve la solution au problème et la renvoie dans un fichier de sortie *******************/
+        String resultat=recherche();
+           
+
+        //System.out.println("\n Nombre de recettes possibles "+nombreRecettes);
+        try{
+            String nomFichier =  args[0]+".out";
+            FileWriter fileWriter = new FileWriter(nomFichier, true);
+            PrintWriter printWriter = new PrintWriter(fileWriter);
+
+            printWriter.println("Signature : " + resultat ); // Écrit le paramètre dans le fichier
+            printWriter.close(); // Ferme le PrintWriter pour libérer les ressources
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
 	}
 
     public static String recherche(){
@@ -76,12 +94,10 @@ public class Main{
             System.out.println("c");
             for(int j=0; j<n; j++){
                 if(i!=j && tab[i].equals(tab[j])){
-                    System.out.println("ici");
                     b=true;
                 }
             }
             if(b==false){
-                System.out.println("là");
                 return tab[i];
             }
             b=false;
