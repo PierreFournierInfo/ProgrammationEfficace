@@ -16,8 +16,8 @@ public class Robin {
     private static int prix2[];
     private static int hauteur2[];
 
-    private static int resultat1[];
-    private static int resultat2[];
+    private static Azulejos resultat1[];
+    private static Azulejos resultat2[];
 
     private static boolean impossible;
 
@@ -38,8 +38,8 @@ public class Robin {
             hauteur1 = new int[nbrAzu];
             prix2 = new int[nbrAzu];
             hauteur2 = new int[nbrAzu];
-            resultat1 = new int[nbrAzu];
-            resultat2 = new int[nbrAzu];
+            resultat1 = new Azulejos[nbrAzu];
+            resultat2 = new Azulejos[nbrAzu];
 
             // Prix1
             ligne = bufferedReader.readLine();
@@ -69,9 +69,10 @@ public class Robin {
                 hauteur2[i] = Integer.parseInt(result[i]); 
             }
 
+            //resultat1 et resultat2
             for(int i = 0; i < nbrAzu; i++){
-                resultat1[i] = i+1;
-                resultat2[i] = i+1;
+                resultat1[i] = new Azulejos(i+1, prix1[i], hauteur1[i]);
+                resultat2[i] = new Azulejos(i+1, prix2[i], hauteur2[i]);
             }
 
             bufferedReader.close();
@@ -88,23 +89,61 @@ public class Robin {
         System.out.println();
     }
 
-    private static void permut(int i, int j, int[] tab){
-        int tmp = tab[i];
+    public static void printAz(Azulejos[] tab){
+        for(int i = 0; i < tab.length; i++){
+            System.out.print(tab[i].indice + " ");
+        }
+        System.out.println();
+    }
+
+    private static void permut(int i, int j, Azulejos[] tab){
+        Azulejos tmp = tab[i];
         tab[i] = tab[j];
         tab[j] = tmp;
     }
 
-    public static void trie(int[] tab, int res){
+    public static void trie(Azulejos[] tab){
         //trie par rapport au prix
         for(int i = 0; i < tab.length - 1; i++){
-            for(int j = tab.length - 1; j > 1; j--){
-            
-                if(tab[j] < tab[i]){
-                    if(res == 1)permut(i, j, resultat1);
-                    else permut(i, j, resultat2);
+            for(int j = tab.length - 1; j > i; j--){
+                //Si ils ont le même prix et ont une hauteur différente
+                if(tab[j].prix == tab[i].prix){
+                    if(tab[j].hauteur < tab[i].hauteur){
+                        permut(i, j, tab);
+                    }
+                    continue;
+                }
+                //Si l'un est plus petit que l'autre
+                if(tab[j].prix < tab[i].prix){
+                    permut(i, j, tab);
                 }
             }
         }
+    }
+
+    public static boolean verif(){
+        for(int i = 0; i < nbrAzu; i++){
+            if(i < nbrAzu-1){
+                if(resultat1[i].prix > resultat1[i+1].prix){
+                    System.out.println(resultat1[i]);
+                    System.out.println(resultat1[i+1]);
+                    return false;
+                }
+                if(resultat1[i].hauteur <= resultat2[i].hauteur){
+                    System.out.println("res1 " + resultat1[i]);
+                    System.out.println("res2 " + resultat2[i]);
+                    return false;
+                }
+            }
+            else{
+                if(resultat1[i].hauteur <= resultat2[i].hauteur){
+                    System.out.println("res1 " + resultat1[i]);
+                    System.out.println("res2 " + resultat2[i]);
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public static void main(String[] args) {
@@ -114,18 +153,17 @@ public class Robin {
         printTab(hauteur1);
         printTab(prix2);
         printTab(hauteur2);
+        System.out.println();
 
         // Résultat
         if ( impossible ){
             System.out.println("impossible");
         }
-
-        printTab(resultat1);
-        printTab(resultat2);
-        trie(prix1, 1);
-        trie(prix2, 2);
-        printTab(resultat1);   
-        printTab(resultat2);     
+        trie(resultat1);
+        trie(resultat2);
+        printAz(resultat1);
+        printAz(resultat2);
+        System.out.println(verif());
 	}  
 }
 
