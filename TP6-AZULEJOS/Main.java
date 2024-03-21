@@ -25,9 +25,14 @@ public class Main {
         for(int i=0;i<nbrAzu ; i++){
             if(resultat1[i]>=0){
                 if(resultat2[i]>=0){
-
+                    if(hauteur1[resultat1[i]]<=hauteur2[resultat2[i]]){
+                        return false;
+                    }
                 }else{
-
+                    int x=0;
+                    while(i+x+1<=nbrAzu){
+                        if( resultat2[i+x+1])
+                    }
                 }
                 
             }
