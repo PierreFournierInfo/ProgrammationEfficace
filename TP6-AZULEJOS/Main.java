@@ -94,9 +94,9 @@ public class Main {
         // Résultat
         if ( impossible ){
             System.out.println("impossible");
+        } else {
+            printTab(resultat1);
+            printTab(resultat2);
         }
-
-        printTab(resultat1);
-        printTab(resultat2);
 	}  
 }
