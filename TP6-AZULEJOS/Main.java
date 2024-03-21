@@ -19,6 +19,8 @@ public class Main {
     private static int resultat1[];
     private static int resultat2[];
 
+    private static boolean impossible;
+
 	@SuppressWarnings("unchecked")
     public static void parse(String file){
     	try {
@@ -36,6 +38,8 @@ public class Main {
             hauteur1 = new int[nbrAzu];
             prix2 = new int[nbrAzu];
             hauteur2 = new int[nbrAzu];
+            resultat1 = new int[nbrAzu];
+            resultat2 = new int[nbrAzu];
 
             // Prix1
             ligne = bufferedReader.readLine();
@@ -87,5 +91,12 @@ public class Main {
         printTab(prix2);
         printTab(hauteur2);
 
+        // Résultat
+        if ( impossible ){
+            System.out.println("impossible");
+        }
+
+        printTab(resultat1);
+        printTab(resultat2);
 	}  
 }
