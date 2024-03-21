@@ -22,16 +22,17 @@ public class Main {
     private static boolean impossible;
 
     public static boolean verif(){
-        for(int i=0;i<nbrAzu ; i++){
-            if(resultat1[i]>=0){
-                if(resultat2[i]>=0){
-                    if(hauteur1[resultat1[i]]<=hauteur2[resultat2[i]]){
+        for(int i=0;i<nbrAzu ; i++){//()On fait un parcours de taille n
+            if(resultat1[i]>=0){ //---à chaque indice i de result1 on verifié si il est déplaçable ou non
+                if(resultat2[i]>=0){ //--si c'est le cas on vérifie si l'indice i de result2 est déplacable ou non 
+                    if(hauteur1[resultat1[i]]<=hauteur2[resultat2[i]]){//-si ce n'est pas le cas on vérifie juste si les 2 blocs vérifient juste la condition.
                         return false;
-                    }
-                }else{
-                    int x=0;
-                    while(i+x+1<=nbrAzu){
-                        if( resultat2[i+x+1])
+                    }else{//-si c'est le cas on place a l indice i de resultat2 la tuile qui a la plus grande hauteur parmis celles déplacables.
+                        int x=0;
+                        while(i+x<=nbrAzu){
+                            if( hauteur2[resultat2[i+x]]<hauteur1[resultat1[i]]){
+                                resultat2[i].
+                            }
                     }
                 }
                 
