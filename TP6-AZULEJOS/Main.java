@@ -10,10 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    private static String ligne;
-    private static char[] alpha; /*{'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'}; */
-    private static ArrayList<String> sc = new ArrayList<>();
-    private static String sol = "";
+    private static int nbrAzu;
+    private static int prix1[];
+    private static int hauteur1[];
+    private static int prix2[];
+    private static int hauteur2[];
+
+    private static int resultat1[];
+    private static int resultat2[];
 
 	@SuppressWarnings("unchecked")
     public static void parse(String file){
@@ -21,7 +25,45 @@ public class Main {
             FileReader fileReader = new FileReader(file);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
+            String ligne;
+            String[] result;
+
+            // Première ligne
            	ligne = bufferedReader.readLine();
+            nbrAzu = Integer.parseInt(ligne);
+
+            prix1 = new int[nbrAzu];
+            hauteur1 = new int[nbrAzu];
+            prix2 = new int[nbrAzu];
+            hauteur2 = new int[nbrAzu];
+
+            // Prix1
+            ligne = bufferedReader.readLine();
+            result = ligne.split(" ");
+            for ( int i = 0; i < nbrAzu; i++){
+                prix1[i] = Integer.parseInt(result[i]); 
+            }
+
+            // Hauteur1
+            ligne = bufferedReader.readLine();
+            result = ligne.split(" ");
+            for ( int i = 0; i < nbrAzu; i++){
+                hauteur1[i] = Integer.parseInt(result[i]); 
+            }
+
+            // Prix2
+            ligne = bufferedReader.readLine();
+            result = ligne.split(" ");
+            for ( int i = 0; i < nbrAzu; i++){
+                prix2[i] = Integer.parseInt(result[i]); 
+            }
+
+            // Hauteur2
+            ligne = bufferedReader.readLine();
+            result = ligne.split(" ");
+            for ( int i = 0; i < nbrAzu; i++){
+                hauteur2[i] = Integer.parseInt(result[i]); 
+            }
 
             bufferedReader.close();
             fileReader.close();
@@ -30,53 +72,20 @@ public class Main {
         }
     }
 
-    private static int nbOcc(String mot){
-        int res = 0;
-        for(String s : sc){
-            if(mot.equals(s))res++;
+    public static void printTab(int[] tab){
+        for ( int i : tab ){
+            System.out.print(" " + i);
         }
-        return res;
-    }
-
-    private static String min(){
-        String res = sc.get(0);
-        for(String s : sc){
-            if(!res.equals(s)){
-                if(nbOcc(s) < nbOcc(res))res = s;
-            }
-        }
-        return res;
-    }
-
-    private static String sousChaine(int deb, int fin){
-        String res = "";
-        for(int i = deb; i < fin; i++){
-            if(i < ligne.length())res = res + ligne.charAt(i);
-        }
-        return res;
+        System.out.println();
     }
 
     public static void main(String[] args) {
-        alpha = new char[26];
-        for(int i = 0; i < 26; i++){
-            alpha[i] = (char)(65 + i);
-        }
-		parse(args[0]);
+        parse(args[0]);
 
-        boolean fini = false;
-        int pas = 1;
-        String scmin = "";
-        while(!fini){
-            for(int i = 0; i < ligne.length(); i++){
-                String s = sousChaine(i, i+pas);
-                //System.out.println(s);
-                sc.add(s);
-            }
-            scmin = min();
-            //System.out.println(scmin);
-            if(nbOcc(scmin) == 1)fini = true;
-            pas++;
-        }
-        System.out.println(scmin);
+        printTab(prix1);
+        printTab(hauteur1);
+        printTab(prix2);
+        printTab(hauteur2);
+
 	}  
 }
