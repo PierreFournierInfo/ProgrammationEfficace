@@ -21,6 +21,27 @@ public class Main {
 
     private static boolean impossible;
 
+    public static boolean verif(){
+        for(int i=0;i<nbrAzu ; i++){
+            if(resultat1[i]>=0){
+                if(resultat2[i]>=0){
+
+                }else{
+
+                }
+                
+            }
+            else{
+                if(resultat2[i]>=0){
+
+                }else{
+
+                }
+            }
+        }
+        return true;
+    }
+
 	@SuppressWarnings("unchecked")
     public static void parse(String file){
     	try {
