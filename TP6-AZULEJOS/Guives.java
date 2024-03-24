@@ -115,7 +115,7 @@ public class Guives {
                     permut(i, j, tab);
                 }
             }
-        }
+        } 
     }
 
     public static boolean verif(){
@@ -138,6 +138,15 @@ public class Guives {
                     System.out.println("res2 " + resultat2[i]);
                     return false;
                 }
+            }
+        }
+        return true;
+    }
+
+    public static boolean verifHauteur(){
+        for(int i = 0; i < nbrAzu; i++){
+            if ( resultat2[i].hauteur >= resultat1[i].hauteur ){
+                return false;
             }
         }
         return true;
@@ -206,7 +215,8 @@ public class Guives {
             System.out.println("impossible");
         } else {
             printAz(resultat1);
-            printAz(resultat2);   
+            printAz(resultat2);
+            System.out.println(verifHauteur()); 
         }
 	}  
 }
