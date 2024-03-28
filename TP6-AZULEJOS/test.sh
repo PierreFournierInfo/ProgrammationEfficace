@@ -13,17 +13,17 @@ TMP_D="tmp"
 mkdir -p "$TMP_D"
 
 #ajouter la compilation
-javac Main.java
+javac Guives.java
 
 for in_file in "$IN_D"/*.in; do
     filename=$(basename "$in_file")
     file_ext="${filename%.*}"
-    java Main $in_file >| "tmp/$file_ext.out"
+    java Guives $in_file >| "tmp/$file_ext.out"
 done
 
 for out_file in "$TMP_D"/*.out; do
     filename=$(basename "$out_file")
-    if diff "$out_file" "$IN_D/$filename"
+    if diff -b "$out_file" "$IN_D/$filename"
     then
         echo "Le fichier $filename est identique au fichier fourni!"
     else
