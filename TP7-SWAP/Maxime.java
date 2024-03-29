@@ -102,7 +102,7 @@ public class Maxime {
     }
 
     
-    public static ArrayList<Disque> triPhase3B(ArrayList<Disque> d){
+    public static ArrayList<Disque> triPhase3(ArrayList<Disque> d){
         ArrayList<Disque> t = new ArrayList<>();
         boolean added = false;
         for (Disque disque : d) {
@@ -120,24 +120,6 @@ public class Maxime {
         return t;
     }
 
-
-    public static ArrayList<Disque> triPhase3D(ArrayList<Disque> d){
-        ArrayList<Disque> t = new ArrayList<>();
-        boolean added = false;
-        for (Disque disque : d) {
-            added = false;
-            for (Disque disque2 : t) {
-                if (disque.apres-disque.avant >= disque2.apres-disque2.avant) {
-                    added = true;
-                    t.add(t.indexOf(disque2), disque);
-                    break;
-                }
-            }
-            if (!added)
-                t.add(disque);
-        }
-        return t;
-    }
 
     public static void phase3( ArrayList<Disque> l){
         for (Disque disque : l) {
@@ -169,7 +151,7 @@ public class Maxime {
         
         phase2(l);
 
-        ArrayList<Disque> l2=triPhase3B(listDisque);
+        ArrayList<Disque> l2=triPhase3(listDisque);
 
         phase3(l2);
 
