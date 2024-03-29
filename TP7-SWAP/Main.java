@@ -8,34 +8,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Collections;
 
-public class Pierre {
+public class Main {
     private static int nbrDisque;
     private static ArrayList<Disque> listDisque = new ArrayList<>();
-    private static int dispo;
-    private static int achete;
-
-
-    public static int solution(){
-        Collections.sort(listDisque, (d1, d2) -> Integer.compare(d1.avant, d2.avant));
-        
-        for(int i=0;i<nbrDisque;i++){
-            if (listDisque.get(i).apres>listDisque.get(i).avant){
-                if(listDisque.get(i).avant>dispo){
-                    achete+=listDisque.get(i).avant-dispo;
-                }
-                dispo+=listDisque.get(i).apres;
-            }
-        }
-        //System.out.println("--------------SOLUTION-------------------"+achete);
-        return achete;
-    }
-
-
-
-
-
 
 	@SuppressWarnings("unchecked")
     public static void parse(String file){
@@ -74,11 +50,7 @@ public class Pierre {
 
     public static void main(String[] args) {
         parse(args[0]);
-        solution();
 
-        //printList();
+        printList();
 	}  
-
-    
-    
 }
