@@ -43,23 +43,25 @@ public class Main {
         }
     }
 
-    public static ArrayList<Disque> separe(ArrayList<Disque> d){
+    public static ArrayList<Disque> separe(ArrayList<Disque> d) {
         ArrayList<Disque> t = new ArrayList<>();
+        boolean added = false;
         for (Disque disque : d) {
-            if(disque.avant < disque.apres){
-                if(t.isEmpty()){
-                    t.add(disque);
-                }
-                else{
-                    for (Disque disque2 : t) {
-                        if(disque.avant < disque2.avant){
-                            t.add((t.indexOf(disque2)),disque);
-                            break;
-                        }
+            added = false;
+            if (disque.avant < disque.apres) {
+                for (Disque disque2 : t) {
+                    if (disque.avant <= disque2.avant) {
+                        added = true;
+                        t.add((t.indexOf(disque2)), disque);
+                        break;
                     }
                 }
-                d.remove(disque);
+                if (!added)
+                    t.add(disque);
             }
+        }
+        for (Disque disque : t) {
+            d.remove(disque);
         }
         return t;
     }
