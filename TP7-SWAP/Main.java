@@ -84,6 +84,7 @@ public class Main {
         }
     }
 
+
     public static void printList(){
         for ( Disque d : listDisque ){
             System.out.println(d.avant + " " + d.apres);
@@ -95,6 +96,8 @@ public class Main {
         parse(args[0]);
 
         printList();
+
+        // CF Maxime.java pour solution finale
 
         System.out.println(achete);
 	}  

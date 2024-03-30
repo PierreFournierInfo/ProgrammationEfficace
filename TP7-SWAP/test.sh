@@ -13,12 +13,12 @@ TMP_D="tmp"
 mkdir -p "$TMP_D"
 
 #ajouter la compilation
-javac Zoe.java
+javac Maxime.java
 
 for in_file in "$IN_D"/*.in; do
     filename=$(basename "$in_file")
     file_ext="${filename%.*}"
-    java Zoe $in_file >| "tmp/$file_ext.out"
+    java Maxime $in_file >| "tmp/$file_ext.out"
 done
 
 for out_file in "$TMP_D"/*.out; do
