@@ -1,0 +1,8 @@
+A faire:
+
+ .Implementer le tas binaire
+ .Implementer Dijkstra
+ .Implementer int cout() qui calcule le cout general en fonction de distanceALarbitre et distanceDepuisArbitre
+ .Implementer repartEquipes() qui genere chaque equipe possible, calcule leur cout, et garde le cout minimum
+
+Discord: https://discord.gg/nB83MdRSGs

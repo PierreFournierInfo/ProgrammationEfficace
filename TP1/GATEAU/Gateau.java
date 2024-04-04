@@ -1,5 +1,8 @@
+
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -28,21 +31,27 @@ public class Gateau {
                 tab[z]=strCurrentLine;
                 z++;
             }
+            bufferedreader.close();
 
             //******On sépare les mots de chaque ligne dans un tableau de tableau de String ****************/
             tabString=parse(tab);
             
             //******On converti le tableau de tableau de String en Tableau de Tableau de Int ***************/
             tabInt=convert(tabString);
-            afficheTab(tabInt);
+            //afficheTab(tabInt);
 
             //*********On trouve la solution au problème et la renvoie dans un fichier de sortie *******************/
 
-            //-
             int nombreRecettes=solution();
-            System.out.println("\n Nombre de recettes possibles "+nombreRecettes);
 
-            //-
+            String nomFichier = "sortieGateau"+ FILENAME+".txt"; // Nom du fichier de sortie
+            //System.out.println("\n Nombre de recettes possibles "+nombreRecettes);
+            FileWriter fileWriter = new FileWriter(nomFichier, true);
+            PrintWriter printWriter = new PrintWriter(fileWriter);
+
+            printWriter.println("Nombre de recettes possibles : " + nombreRecettes); // Écrit le paramètre dans le fichier
+            printWriter.close(); // Ferme le PrintWriter pour libérer les ressources
+        
             
         } catch (IOException e) {
             e.printStackTrace();
@@ -81,7 +90,7 @@ public class Gateau {
         }
         return res;
     }
-    
+
     public static int[][] convert(String [][] tableau){
         int [][] tab=new int[tableau.length][];
         for(int i=0;i<tableau.length;i++){
@@ -113,6 +122,9 @@ public class Gateau {
     }
 
     public static int solution (){
+        if(tabInt.length==0){
+            return 0;
+        }
         int min=tabInt[0][1];
         for(int i=0;i<tabString.length;i++){
             if(tabInt[i][0]==0){
