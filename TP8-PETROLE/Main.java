@@ -42,7 +42,23 @@ public class Main {
     }
 
     public static int solution(){
-        return 0;
+        ArrayList<Integer> list = new ArrayList<>();
+        if(listGisements.size() == 1)
+            return listGisements.get(0).qt;
+        for (Gisement gisement : listGisements) {
+            for (Gisement gisement2 : listGisements) {
+                list.add(Maxime.relie(gisement.x1,gisement.y,gisement2.x1,gisement2.y,listGisements));
+                list.add(Maxime.relie(gisement.x1,gisement.y,gisement2.x2,gisement2.y,listGisements));
+                list.add(Maxime.relie(gisement.x2,gisement.y,gisement2.x2,gisement2.y,listGisements));
+                list.add(Maxime.relie(gisement.x2,gisement.y,gisement2.x1,gisement2.y,listGisements));
+            }
+        }
+        int t = 0;
+        for (Integer sol : list) {
+            if(t < sol)
+                t = sol;
+        }
+        return t;
     }
 
     public static void printList(){
@@ -53,7 +69,7 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        parse(args[0]);
+        parse("C:\\Users\\chill\\OneDrive\\Bureau\\projetsprogrammationfonctionnelle-develop\\TP8-PETROLE\\sample\\03.in");
 
         printList();
 
