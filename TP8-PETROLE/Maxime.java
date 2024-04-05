@@ -8,8 +8,7 @@ public class Maxime {
         double vectory = y2 - y1;
         int petrole = 0;
         for (Gisement gisement : listGisements) {
-            double coef = (gisement.y - y1)/vectory;
-            double x = vectorx*coef + x1;
+            double x = (vectorx*(gisement.y - y1))/vectory + x1;
             if((x<=gisement.x1&&x>=gisement.x2)||(x>=gisement.x1&&x<=gisement.x2))
                 petrole += gisement.qt;
         }
