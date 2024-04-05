@@ -42,23 +42,51 @@ public class Main {
     }
 
     public static int solution(){
-        ArrayList<Integer> list = new ArrayList<>();
         if(listGisements.size() == 1)
             return listGisements.get(0).qt;
+        ArrayList<Gisement>[] filonList = new ArrayList[1000001];
         for (Gisement gisement : listGisements) {
-            for (Gisement gisement2 : listGisements) {
-                list.add(Maxime.relie(gisement.x1,gisement.y,gisement2.x1,gisement2.y,listGisements));
-                list.add(Maxime.relie(gisement.x1,gisement.y,gisement2.x2,gisement2.y,listGisements));
-                list.add(Maxime.relie(gisement.x2,gisement.y,gisement2.x2,gisement2.y,listGisements));
-                list.add(Maxime.relie(gisement.x2,gisement.y,gisement2.x1,gisement2.y,listGisements));
+            if(filonList[gisement.y] == null)
+                filonList[gisement.y] = new ArrayList<Gisement>();
+            if(gisement.qt !=0)
+                filonList[gisement.y].add(gisement);
+        }
+        ArrayList<ArrayList<Gisement>> strateList= new ArrayList<>();
+        for(int i = 0; i<1000001;i++){
+            if(filonList[i] != null)
+                strateList.add(filonList[i]);
+        }
+        if(strateList.size() == 1){
+            int r =0;
+            for (Gisement gisement : strateList.get(0)) {
+                if(r < gisement.qt)
+                    r = gisement.qt;
+            }
+            return r;
+        }
+        int f = 0;
+        for (int i = 0; i< strateList.size();i++) {
+            for(int j = i+1 ; j< strateList.size(); j++){
+                for(int t = 0; t<strateList.get(i).size();t++){
+                    for(int p = 0; p<strateList.get(j).size();p++){
+                        int a = (Maxime.relie(strateList.get(i).get(t).x1,strateList.get(i).get(t).y,strateList.get(j).get(p).x1,strateList.get(j).get(p).y,listGisements));
+                        if(a>f)
+                            f = a;
+                        int b = (Maxime.relie(strateList.get(i).get(t).x1,strateList.get(i).get(t).y,strateList.get(j).get(p).x2,strateList.get(j).get(p).y,listGisements));
+                        if(b>f)
+                            f = b;
+                        int c = (Maxime.relie(strateList.get(i).get(t).x2,strateList.get(i).get(t).y,strateList.get(j).get(p).x2,strateList.get(j).get(p).y,listGisements));
+                        if(c>f)
+                            f = c;
+                        int d = (Maxime.relie(strateList.get(i).get(t).x2,strateList.get(i).get(t).y,strateList.get(j).get(p).x1,strateList.get(j).get(p).y,listGisements));
+                        if(d>f)
+                            f = d;
+                    }
+                }
             }
         }
-        int t = 0;
-        for (Integer sol : list) {
-            if(t < sol)
-                t = sol;
-        }
-        return t;
+        
+        return f;
     }
 
     public static void printList(){
@@ -69,9 +97,9 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        parse("C:\\Users\\chill\\OneDrive\\Bureau\\projetsprogrammationfonctionnelle-develop\\TP8-PETROLE\\sample\\03.in");
+        parse(args[0]);
 
-        printList();
+        //printList();
 
         System.out.println(solution());
 	}  
